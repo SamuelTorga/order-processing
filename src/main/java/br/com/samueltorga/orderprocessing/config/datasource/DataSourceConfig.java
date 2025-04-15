@@ -34,15 +34,15 @@ public class DataSourceConfig {
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.master.hikari")
-    public HikariConfig masterHikariProperties() {
+    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+    public HikariConfig hikariProperties() {
         return new HikariConfig();
     }
 
     @Bean(name = "masterDataSource")
     public DataSource masterDataSource(DataSourceProperties masterDataSourceProperties,
-                                       HikariConfig masterHikariProperties) {
-        HikariConfig config = new HikariConfig(masterHikariProperties.getDataSourceProperties());
+                                       HikariConfig hikariProperties) {
+        HikariConfig config = new HikariConfig(hikariProperties.getDataSourceProperties());
         config.setJdbcUrl(masterDataSourceProperties.getUrl());
         config.setUsername(masterDataSourceProperties.getUsername());
         config.setPassword(masterDataSourceProperties.getPassword());
@@ -56,16 +56,10 @@ public class DataSourceConfig {
         return new DataSourceProperties();
     }
 
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.replica.hikari")
-    public HikariConfig replicaHikariProperties() {
-        return new HikariConfig();
-    }
-
     @Bean(name = "replicaDataSource")
     public DataSource replicaDataSource(@Qualifier("replicaDataSourceProperties") DataSourceProperties replicaDataSourceProperties,
-                                        HikariConfig replicaHikariProperties) {
-        HikariConfig config = new HikariConfig(replicaHikariProperties.getDataSourceProperties());
+                                        HikariConfig hikariProperties) {
+        HikariConfig config = new HikariConfig(hikariProperties.getDataSourceProperties());
         config.setJdbcUrl(replicaDataSourceProperties.getUrl());
         config.setUsername(replicaDataSourceProperties.getUsername());
         config.setPassword(replicaDataSourceProperties.getPassword());

@@ -10,3 +10,10 @@ management:
     web:
       exposure:
         include: "*"
+
+logging:
+  level:
+    com.zaxxer.hikari: TRACE
+    org.hibernate.SQL: TRACE
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR
+    br.com.samueltorga.orderprocessing: TRACE

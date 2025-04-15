@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: order-processing
+  devtools:
+    add-properties: false
+  docker:
+    compose:
+      enabled: false
+
+
+  datasource:
+    master:
+      url: jdbc:mysql://localhost:3306/order_processing
+      username: appuser
+      password: appsecret
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    replica:
+      url: jdbc:mysql://localhost:3316/order_processing
+      username: appuser
+      password: appsecret
+      driver-class-name: com.mysql.cj.jdbc.Driver

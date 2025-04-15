@@ -1,0 +1,54 @@
+services:
+  mysql-master:
+    image: 'mysql:8.0'
+    restart: always
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=admin'
+      - 'MYSQL_DATABASE=order_processing'
+      - 'MYSQL_USER=appuser'
+      - 'MYSQL_PASSWORD=appsecret'
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-master-data:/var/lib/mysql
+      - ./docker/mysql/master-init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: >
+      --server-id=1
+      --log-bin=mysql-bin
+      --binlog-do-db=order_processing
+      --binlog-ignore-db=mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 10
+
+  mysql-replica:
+    image: 'mysql:8.0'
+    restart: always
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=admin'
+      - 'MYSQL_DATABASE=order_processing'
+      - 'MYSQL_USER=appuser'
+      - 'MYSQL_PASSWORD=appsecret'
+    depends_on:
+      - mysql-master
+    ports:
+      - '3316:3306'
+    volumes:
+      - ./docker/mysql/wait-for.sh:/wait-for.sh
+      - ./docker/mysql/slave-entrypoint.sh:/docker-entrypoint-initdb.d/99-slave-entrypoint.sh
+      - mysql-replica-data:/var/lib/mysql
+    command: >
+        --server-id=2
+        --relay-log=relay-log
+        --log-bin=mysql-bin
+        --binlog-do-db=order_processing
+        --read-only=ON
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  mysql-master-data:
+  mysql-replica-data:

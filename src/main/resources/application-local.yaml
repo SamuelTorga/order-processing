@@ -1,0 +1,6 @@
+spring:
+  devtools:
+    add-properties: false
+  docker:
+    compose:
+      enabled: true

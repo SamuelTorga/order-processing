@@ -70,6 +70,7 @@ public class DataSourceConfig {
         config.setUsername(replicaDataSourceProperties.getUsername());
         config.setPassword(replicaDataSourceProperties.getPassword());
         config.setPoolName("HikariReplica");
+        config.setReadOnly(true);
         return new HikariDataSource(config);
     }
 

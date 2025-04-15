@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.master.hikari",
+      "type": "com.zaxxer.hikari.HikariConfig",
+      "description": "Hikari configuration for master datasource."
+    },
+    {
+      "name": "spring.datasource.replica.hikari",
+      "type": "com.zaxxer.hikari.HikariConfig",
+      "description": "Hikari configuration for replica datasource."
+    }
+  ]
+}

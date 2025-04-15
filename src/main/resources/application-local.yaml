@@ -1,6 +1,12 @@
 spring:
   devtools:
-    add-properties: false
+    add-properties: true
   docker:
     compose:
       enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

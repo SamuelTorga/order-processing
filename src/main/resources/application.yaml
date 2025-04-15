@@ -7,6 +7,8 @@ spring:
     compose:
       enabled: false
 
+  jpa:
+    open-in-view: false
 
   datasource:
     master:
@@ -14,9 +16,21 @@ spring:
       username: appuser
       password: appsecret
       driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        minimum-idle: 2
+        idle-timeout: 30000
+        connection-timeout: 30000
+        max-lifetime: 1800000
 
     replica:
       url: jdbc:mysql://localhost:3316/order_processing
       username: appuser
       password: appsecret
       driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        minimum-idle: 2
+        idle-timeout: 30000
+        connection-timeout: 30000
+        max-lifetime: 1800000

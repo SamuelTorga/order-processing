@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -22,9 +23,8 @@ import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(
-        basePackages = "br.com.samueltorga.orderprocessing.repository"
-)
+@EntityScan(basePackages = "br.com.samueltorga.orderprocessing.model")
+@EnableJpaRepositories(basePackages = "br.com.samueltorga.orderprocessing.repository")
 public class DataSourceConfig {
 
     @Bean
@@ -93,7 +93,7 @@ public class DataSourceConfig {
     ) {
         return builder
                 .dataSource(routingDataSource)
-                .packages("br.com.samueltorga.orderprocessing.repository")
+                .packages("br.com.samueltorga.orderprocessing.model")
                 .persistenceUnit("default")
                 .build();
     }

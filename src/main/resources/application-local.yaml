@@ -4,7 +4,14 @@ spring:
   docker:
     compose:
       enabled: true
-
+      lifecycle-management: start_only
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      data-locations: classpath:db-init.sql
 management:
   endpoints:
     web:
@@ -13,7 +20,4 @@ management:
 
 logging:
   level:
-    com.zaxxer.hikari: TRACE
-    org.hibernate.SQL: TRACE
-    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR
     br.com.samueltorga.orderprocessing: TRACE

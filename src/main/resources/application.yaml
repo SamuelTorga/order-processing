@@ -6,7 +6,6 @@ spring:
   docker:
     compose:
       enabled: false
-
   jpa:
     open-in-view: false
 

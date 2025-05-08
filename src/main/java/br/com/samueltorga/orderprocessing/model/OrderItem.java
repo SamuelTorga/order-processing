@@ -3,8 +3,11 @@ package br.com.samueltorga.orderprocessing.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -22,6 +25,14 @@ public class OrderItem {
 
     @Column(nullable = false)
     private Integer quantity;
+
+    @CreatedDate
+    @Column(name = "created", updatable = false)
+    private LocalDateTime created;
+
+    @LastModifiedDate
+    @Column(name = "modified")
+    private LocalDateTime modified;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false, foreignKey = @ForeignKey(name = "fk_order_item_product"))

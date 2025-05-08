@@ -7,7 +7,6 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 public class RoutingDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
-        log.trace("Using DataSourceType: {}", DataSourceContextHolder.get());
         return DataSourceContextHolder.get() != null ? DataSourceContextHolder.get() : DataSourceType.MASTER;
     }
 }

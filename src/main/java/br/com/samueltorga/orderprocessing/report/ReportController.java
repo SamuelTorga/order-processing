@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Slf4j
-@RequestMapping("/report")
 @RestController
+@RequestMapping("/report")
 @RequiredArgsConstructor
 public class ReportController {
 

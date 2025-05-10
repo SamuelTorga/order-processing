@@ -1,6 +1,9 @@
 spring:
   application:
     name: order-processing
+  threads:
+    virtual:
+      enabled: true
   devtools:
     add-properties: false
   docker:
@@ -8,7 +11,6 @@ spring:
       enabled: false
   jpa:
     open-in-view: false
-
   datasource:
     hikari:
       maximum-pool-size: 5

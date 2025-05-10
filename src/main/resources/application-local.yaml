@@ -22,5 +22,5 @@ management:
 logging:
   level:
     br.com.samueltorga.orderprocessing: TRACE
-    com.zaxxer.hikari: DEBUG
+    #com.zaxxer.hikari: DEBUG
     #org.hibernate: TRACE
